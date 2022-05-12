@@ -1,0 +1,8 @@
+/__pycache__
+/checkpoint
+/cifar100_data
+/cifar10_data
+/data
+/mnist_data
+/scripts
+/trades_cifar100_wide-resnet-34x10.out
