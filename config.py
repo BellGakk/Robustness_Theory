@@ -38,16 +38,17 @@ adv_example_params = {
 mean = {
     'cifar10': (0.4914, 0.4822, 0.4465),
     'cifar100': (0.5071, 0.4867, 0.4408),
+    'mnist': (0.1307)
 }
 
 std = {
     'cifar10': (0.2023, 0.1994, 0.2010),
     'cifar100': (0.2675, 0.2565, 0.2761),
+    'mnist': (0.3081)
 }
 
 # Only for cifar-10
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-
 
 def learning_rate(epoch, args):
     optim_factor = 0

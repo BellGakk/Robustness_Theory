@@ -1,4 +1,4 @@
-from networks.single_hidden import *
+from networks.mlp import *
 from networks.resnet import *
 from networks.wide_resnet import *
 
@@ -43,7 +43,7 @@ def getNetwork(args, params):
         net = Wide_ResNet(args.depth, args.widen_factor, args.dropout, num_classes)
         file_name = args.training_type+'-wide-resnet-'+str(args.depth)+'x'+str(args.widen_factor)
     elif (args.net_type == 'mlp'):
-        net = MLP(params['input_size'], params['train_size']*args.classes, args.classes)
+        net = MLP(params['input_size'], params['train_size']*args.classes, args.depth, args.classes)
         file_name = args.training_type+'-MLP-'+str(args.depth)
         if args.bn: 
             file_name += '-BN'

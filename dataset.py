@@ -7,45 +7,49 @@ import cv2
 from scipy import misc
 import matplotlib.pyplot as plt
 import matplotlib
+import config as cf
 
-transform_train = transforms.Compose([
+transform_mnist = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))]
+    transforms.Normalize((.5), (.5))
+    ]
 )
 
-transform_test = transforms.Compose([
+transform_cifar10 = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))]
+    #transforms.Normalize(cf.mean['cifar10'], cf.std['cifar10'])
+    ]
+)
+
+transform_cifar100 = transforms.Compose([
+    transforms.ToTensor(),
+    #transforms.Normalize(cf.mean['cifar100'], cf.std['cifar100'])
+    ]
 )
 def mnist():
-    mnist_train = datasets.MNIST(root='./mnist_data/', 
-                                 transform=transform_train,
-                                 train=True,
-                                 download=True)
-    mnist_test = datasets.MNIST(root='./mnist_data/',
-                                transform=transform_test,
-                                train=False,
-                                download=True)
+    mnist_train = datasets.MNIST(root='./mnist_data/', train=True, transform=transform_mnist, download=True)
+    mnist_test = datasets.MNIST(root="./mnist_data", train=False, transform=transform_mnist, download=True)
+
     return mnist_train, mnist_test
 
 def cifar10():
     cifar10_train = datasets.CIFAR10(root='./cifar10_data/',
-                                   transform=transform_train,
+                                   transform=transform_cifar10,
                                    train=True,
                                    download=True)
     cifar10_test = datasets.CIFAR10(root='./cifar10_data/',
-                                  transform=transform_test,
+                                  transform=transform_cifar10,
                                   train=False,
                                   download=True)
     return cifar10_train, cifar10_test
 
 def cifar100():
     cifar100_train = datasets.CIFAR100(root='./cifar100_data/',
-                                       transform=transform_train,
+                                       transform=transform_cifar100,
                                        train=True,
                                        download=True)
     cifar100_test = datasets.CIFAR100(root='./cifar100_data/',
-                                       transform=transform_test,
+                                       transform=transform_cifar100,
                                        train=False,
                                        download=True)
     return cifar100_train, cifar100_test

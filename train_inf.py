@@ -17,7 +17,7 @@ import argparse
 import datetime
 import numpy as np
 
-from networks.single_hidden import *
+from networks.mlp import *
 from torch.autograd import Variable
 from utils import * 
 from dataset import * 
@@ -29,7 +29,7 @@ parser.add_argument('--magnitude', default=1.0, type=float)
 parser.add_argument('--dataset', default='cifar10', type=str)
 parser.add_argument('--log_intervals', default=10, type=int)
 parser.add_argument('--classes', default=2, type=int)
-parser.add_argument('--num_epochs', default=10, type=int)
+parser.add_argument('--num_epochs', default=1, type=int)
 parser.add_argument('--lr', default=0.1, type=float)
 parser.add_argument('--optimizer', default='sgd', type=str)
 parser.add_argument('--loss', default='mse', type=str)
@@ -227,6 +227,7 @@ if __name__ == '__main__':
     mlp.cuda()
 
     elapsed_time = 0.0
+    
     for epoch in range(args.start_epoch, args.start_epoch+args.num_epochs):
         start_time = time.time()
         if args.training_type == 'std':
