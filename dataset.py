@@ -8,35 +8,44 @@ from scipy import misc
 import matplotlib.pyplot as plt
 import matplotlib
 
+transform_train = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))]
+)
+
+transform_test = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))]
+)
 def mnist():
     mnist_train = datasets.MNIST(root='./mnist_data/', 
-                                 transform=transforms.ToTensor(),
+                                 transform=transform_train,
                                  train=True,
                                  download=True)
     mnist_test = datasets.MNIST(root='./mnist_data/',
-                                transform=transforms.ToTensor(),
+                                transform=transform_test,
                                 train=False,
                                 download=True)
     return mnist_train, mnist_test
 
 def cifar10():
     cifar10_train = datasets.CIFAR10(root='./cifar10_data/',
-                                   transform=transforms.ToTensor(),
+                                   transform=transform_train,
                                    train=True,
                                    download=True)
     cifar10_test = datasets.CIFAR10(root='./cifar10_data/',
-                                  transform=transforms.ToTensor(),
+                                  transform=transform_test,
                                   train=False,
                                   download=True)
     return cifar10_train, cifar10_test
 
 def cifar100():
     cifar100_train = datasets.CIFAR100(root='./cifar100_data/',
-                                       transform=transforms.ToTensor(),
+                                       transform=transform_train,
                                        train=True,
                                        download=True)
     cifar100_test = datasets.CIFAR100(root='./cifar100_data/',
-                                       transform=transforms.ToTensor(),
+                                       transform=transform_test,
                                        train=False,
                                        download=True)
     return cifar100_train, cifar100_test
@@ -70,7 +79,8 @@ def main():
     print('The length of CIFAR10\'s testing dataset is '+str(len(cifar10_test_loader)))
     print('The length of CIFAR100\'s training dataset is '+str(len(cifar100_train_loader)))
     print('The length of CIFAR100\'s testing dataset is '+str(len(cifar100_test_loader)))
-    
+    for idx, (inputs, targets) in enumerate(mnist_test_loader):
+        print(inputs.data)
     return mnist_train_loader, mnist_test_loader, cifar10_train_loader, cifar10_test_loader, cifar100_train_loader, cifar100_test_loader
     
 if __name__ == '__main__':

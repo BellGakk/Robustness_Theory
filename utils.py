@@ -43,7 +43,7 @@ def getNetwork(args, params):
         net = Wide_ResNet(args.depth, args.widen_factor, args.dropout, num_classes)
         file_name = args.training_type+'-wide-resnet-'+str(args.depth)+'x'+str(args.widen_factor)
     elif (args.net_type == 'mlp'):
-        net = MLP(params['input_size'], params['class_size']*args.classes, args.classes)
+        net = MLP(params['input_size'], params['train_size']*args.classes, args.classes)
         file_name = args.training_type+'-MLP-'+str(args.depth)
         if args.bn: 
             file_name += '-BN'
