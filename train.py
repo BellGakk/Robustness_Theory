@@ -19,7 +19,7 @@ import datetime
 from networks.wide_resnet import *
 from networks.resnet import *
 from torch.autograd import Variable
-
+from dataset import *
 
 parser = argparse.ArgumentParser(description='Adversarial Training')
 parser.add_argument('--net_type', default='resnet', type=str, help='model')
@@ -28,7 +28,7 @@ parser.add_argument('--widen_factor', default=16, type=int, help='width of model
 parser.add_argument('--dropout', default=0.3, type=float, help='dropout_rate')
 parser.add_argument('--dataset', default='cifar10', type=str, help='dataset = [cifar10/cifar100]')
 parser.add_argument('--resume', default=False, help='resume from checkpoint')
-parser.add_argument('--training_type', default='trades', type=str, help='standarding training or adversarial training.')
+parser.add_argument('--training_type', default='trades', type=str, help='standard supervised training or adversarial training.')
 parser.add_argument('--log_intervals', default=20, help='intervals for logging the training result')
 
 # Hyper Parameter settings
