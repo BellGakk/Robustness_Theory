@@ -17,13 +17,13 @@ transform_mnist = transforms.Compose([
 
 transform_cifar10 = transforms.Compose([
     transforms.ToTensor(),
-    #transforms.Normalize(cf.mean['cifar10'], cf.std['cifar10'])
+    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
     ]
 )
 
 transform_cifar100 = transforms.Compose([
     transforms.ToTensor(),
-    #transforms.Normalize(cf.mean['cifar100'], cf.std['cifar100'])
+    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
     ]
 )
 def mnist():

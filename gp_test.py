@@ -27,7 +27,13 @@ def gp_test(dataset, gp_num):
         trainset, testset = cifar100()
 
     mlp = MLP(args.input_size, args.width * args.input_size, args.depth, args.classes)
-    mlp.apply(param_init)
+    for module in mlp.modules():
+        print(module)
+        if isinstance(module, torch.nn.Linear):
+            #nn.init.xavier_uniform_(module.weight.data)
+            #module.bias.data.zero_()            
+            module.weight.data.normal_(mean = 0.0, std = 1.0)
+            module.bias.data.zero_()
     mlp.eval()
     inputs = [x for x in torch.arange(-5, 5, 0.01)]
     for x in inputs:
@@ -37,6 +43,5 @@ def gp_test(dataset, gp_num):
 
 if __name__ == '__main__':
     for num in range(args.gp_num):
-        print(num)
         gp_test(args.dataset, num)
 

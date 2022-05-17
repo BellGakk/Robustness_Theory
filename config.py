@@ -52,19 +52,12 @@ classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship'
 
 def learning_rate(epoch, args):
     optim_factor = 0
-    if args.training_type == 'std' and args.net_type != 'mlp':
-        if epoch > 160:
+    if args.training_type == 'std':
+        if epoch/args.num_epochs > 0.8:
             optim_factor = 3
-        elif epoch > 120:
+        elif epoch/args.num_epochs > 0.6:
             optim_factor = 2
-        elif epoch > 60:
-            optim_factor = 1
-        return args.lr*math.pow(0.2, optim_factor)
-    
-    elif args.training_type == 'std' and args.net_type == 'mlp':
-        if epoch > 750:
-            optim_factor = 2
-        elif epoch > 500:
+        elif epoch/args.num_epochs > 0.3:
             optim_factor = 1
         return args.lr*math.pow(0.2, optim_factor)
 

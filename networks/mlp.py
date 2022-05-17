@@ -22,7 +22,6 @@ class MLP(nn.Module):
         layers = []
         for i in range(depth - 1):
             layers.append(nn.Linear(inter_plane, inter_plane))
-            layers.append(nn.BatchNorm1d(inter_plane))
             layers.append(nn.ReLU())
         self.subs = nn.Sequential(*layers)
         self.mlp2 = nn.Linear(inter_plane, out_class)
@@ -33,8 +32,6 @@ class MLP(nn.Module):
         if self.depth > 1:
             out = self.subs(out)
         out = self.mlp2(out)
-        if self.out_class > 1:
-            out = self.softmax(out) 
         return out
 
 if __name__ == '__main__':
